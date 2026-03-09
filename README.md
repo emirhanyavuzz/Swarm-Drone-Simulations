@@ -36,18 +36,18 @@ src/
 
 ## Simülasyon Listesi
 
-### Aşama 2: Geometrik Formasyonlar
+### Geometrik Formasyonlar
 - [ ] V Formasyonu
 - [ ] Elmas (Diamond) Formasyonu
 - [ ] Grid (Izgara) Formasyonu
 - [ ] Çizgi (Line Abreast) Formasyonu
 
-### Aşama 3: Taktiksel Uçuş
+### Taktiksel Uçuş
 - [ ] Sızma (Infiltration)
 - [ ] Doyurma Saldırısı (Saturation Attack)
 - [ ] Sanal Yapı (Virtual Structure)
 
-### Aşama 4: Davranışsal Modeller
+### Davranışsal Modeller
 - [ ] Takip ve Kuşatma (Surround & Pursue)
 - [ ] Kendi Kendini İyileştirme (Self-Healing)
 - [ ] Bölgesel Devriye (Swarm CAP)

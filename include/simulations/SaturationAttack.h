@@ -39,7 +39,7 @@ public:
         int n = swarm.getDroneCount();
 
         std::cout << "[HEDEF] Merkez: " << m_target << "\n";
-        std::cout << "[FAZA 1] Dronelar orbital pozisyonlara dagitiliyor...\n\n";
+        std::cout << "[FAZ 1] Dronelar orbital pozisyonlara dagitiliyor...\n\n";
 
         // Deploy drones in a circle around the target at orbital radius
         for (int i = 0; i < n; ++i) {
@@ -62,7 +62,7 @@ public:
                 swarm.update(dt);
                 if (swarm.allReachedTarget(1.0)) {
                     m_phase = Phase::CONVERGE;
-                    std::cout << "[FAZA 2] Tum dronelar orbital pozisyonda!\n";
+                    std::cout << "[FAZ 2] Tum dronelar orbital pozisyonda!\n";
                     std::cout << "         Es zamanli saldiri baslatiliyor...\n\n";
 
                     // Calculate time-on-target: all drones converge at same speed
