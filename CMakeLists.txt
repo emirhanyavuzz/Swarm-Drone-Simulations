@@ -13,6 +13,17 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 # Create executable
 add_executable(${PROJECT_NAME} ${SOURCES})
 
+# Fetch Raylib
+include(FetchContent)
+FetchContent_Declare(
+    raylib
+    URL https://github.com/raysan5/raylib/archive/refs/tags/5.0.tar.gz
+)
+FetchContent_MakeAvailable(raylib)
+
+# Link Raylib
+target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
+
 # Output directory
 set_target_properties(${PROJECT_NAME} PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"

@@ -14,6 +14,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include "Visualizer.h"
 
 // ============================================================
 //  Simulation runner
@@ -34,21 +35,39 @@ void runSimulation(Simulation& sim, int droneCount) {
 
     sim.setup(swarm);
 
-    const double dt = 0.1;
-    const int maxSteps = 500;
+    const double dt = 0.01;  // Sim goes much slower
+    const int maxSteps = 10000;
     int step = 0;
 
-    while (!sim.isComplete() && step < maxSteps) {
+    // Initialize Raylib Visualizer
+    Visualizer vis(800, 800, "Swarm Drone Simulation - " + sim.getName());
+
+    std::cout << "Simulasyon basliyor. Ekrandan takip edebilirsiniz...\n";
+
+    // Main loop
+    while (!sim.isComplete() && step < maxSteps && !vis.shouldClose()) {
         sim.update(swarm, dt);
         ++step;
 
-        // Print every 10 steps
-        if (step % 10 == 0) {
-            std::cout << "--- Adim " << step << " ---\n";
-            swarm.printPositions();
-            std::cout << "\n";
-        }
+        // Draw Frame
+        vis.beginDrawing();
+        vis.drawDrones(swarm);
+        vis.drawInfo(sim.getName(), step, maxSteps);
+        vis.endDrawing();
     }
+
+    // Wait until user closes the window
+    std::cout << "\nSimulasyon bitti. Lutfen ekrani kapatiniz.\n";
+    while (!vis.shouldClose()) {
+        vis.beginDrawing();
+        vis.drawDrones(swarm);
+        
+        // Final info
+        vis.drawInfo(sim.getName() + " - FINISHED", step, maxSteps);
+        
+        vis.endDrawing();
+    }
+    vis.close();
 
     std::cout << "--- Son Durum (Adim " << step << ") ---\n";
     swarm.printPositions();
@@ -56,7 +75,7 @@ void runSimulation(Simulation& sim, int droneCount) {
     if (sim.isComplete()) {
         std::cout << "\n[OK] Simulasyon tamamlandi! Tum dronelar formasyona ulasti.\n";
     } else {
-        std::cout << "\n[!] Maksimum adim sayisina ulasildi.\n";
+        std::cout << "\n[!] Maksimum adim sayisina ulasildi veya pencere kapatildi.\n";
     }
 }
 

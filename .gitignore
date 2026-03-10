@@ -37,3 +37,11 @@ Makefile
 Thumbs.db
 .DS_Store
 desktop.ini
+
+# Drone Simulation specific
+raylib_mingw/
+raylib.zip
+build.log
+error.log
+input.txt
+out.log
