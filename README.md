@@ -1,37 +1,42 @@
 # Sürü Drone Simülasyonu (Swarm Drone Flight Simulation)
 
-C++ ile geliştirilmiş sürü drone uçuş simülasyonu. Farklı formasyon tipleri, taktiksel uçuş modelleri ve davranışsal uçuş senaryolarını simüle eder.
+C++ ile geliştirilmiş, **Raylib 5.0** tabanlı gerçek zamanlı, görsel sürü drone uçuş simülasyonu. Farklı formasyon tipleri, taktiksel uçuş modelleri ve davranışsal uçuş senaryolarını terminal menüsü üzerinden seçerek anlık olarak bir GUI üzerinde simüle eder.
 
-## Derleme (Build)
+## Derleme ve Çalıştırma (Windows - MinGW)
 
-```bash
-mkdir build
-cd build
-cmake ..
-cmake --build .
+Projede `Raylib 5.0` kullanıldığından dolayı sisteme minGW DLL'lerinin doğru şekilde tanıtılması gerekmektedir. Projeyi yeniden derlemek ve anında çalıştırmak için aşağıdaki bat dosyalarını kullanabilirsiniz:
+
+### 1. Yeniden Derlemek İçin:
+```cmd
+build.bat
 ```
+*(Bu komut `src` içindeki tüm C++ dosyalarını toplayıp `SwarmDroneSim.exe` adıyla statik olarak derler ve logları `build.log`a kaydeder.)*
 
-## Çalıştırma
-
-```bash
-./bin/SwarmDroneSim     # Linux/Mac
-.\bin\Debug\SwarmDroneSim.exe  # Windows
+### 2. Simülasyonu Çalıştırmak İçin:
+```cmd
+run.bat
 ```
+*(Bu komut MinGW kütüphanelerini geçici PATH'e ekleyerek `.exe` dosyasını sorunsuzca başlatır. Ekrana menü gelir.)*
+
+> **Not:** Sisteminizde standart bir MSYS2/MinGW kurulumu (`C:\msys64\mingw64\bin`) bulunduğu varsayılarak tasarlanmıştır.
 
 ## Proje Yapısı
 
 ```
 include/
 ├── Vec3.h          # 3D vektör matematiği
-├── Drone.h         # Drone modeli
-├── Swarm.h         # Sürü yöneticisi
-├── Simulation.h    # Simülasyon arayüzü (abstract)
-└── simulations/    # Simülasyon implementasyonları (ileriki aşamalar)
+├── Drone.h         # Model: Tekil Drone özellikleri (hız, hedef vb.)
+├── Swarm.h         # Controller: Sürü yöneticisi
+├── Simulation.h    # Arayüz: Simülasyon temel abstract sınıfı
+├── Visualizer.h    # View: Raylib GUI Görselleştirici altyapısı
+└── simulations/    # Formasyon ve taktiksel senaryolar
+
 src/
-├── main.cpp        # Giriş noktası + menü
-├── Drone.cpp       # Drone implementasyonu
-├── Swarm.cpp       # Swarm implementasyonu
-└── simulations/    # Simülasyon implementasyonları (ileriki aşamalar)
+├── main.cpp        # Giriş Noktası & Menü & Raylib Loop
+├── Drone.cpp       # Drone hareket hesaplamaları
+├── Swarm.cpp       # Sürü fonksiyonları
+├── Visualizer.cpp  # GUI Drone çizimleri ve Grid rendering
+└── simulations/    # Simülasyon senaryo implementasyonları
 ```
 
 ## Simülasyon Listesi
